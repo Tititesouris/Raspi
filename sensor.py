@@ -89,6 +89,6 @@ start_time = time.time()
 while True:
     (t, h) = am2320.readSensor()
     with open("public/logs.csv", "a") as file:
-        file.write(str(time.time()) + ";" + str(t) + ";" + str(h))
+        file.write(str(time.time()) + ";" + str(t) + ";" + str(h) + "\n")
         file.close()
     time.sleep(60.0 - ((time.time() - start_time) % 60.0))
