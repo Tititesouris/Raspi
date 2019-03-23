@@ -10,19 +10,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 <div id="chart_div"></div>
 <script>
-google.charts.load('current', {
-  callback: function () {
-    csvString = 'Site,Janvier,Février,Mars,Avril,Mai,Juin,Juillet,Août,Septembre,Octobre,Novembre,Décembre\nCITROEN VILLEFRANCHE CARROSSERIE,0,0,14,0,18,21,0,0,0,0,0,0\nCITROEN VILLEFRANCHE ,240,237,230,264,219,285,219,130,4,0,0,0\nNISSAN VILLEFRANCHE ,174,202,215,181,196,244,203,107,10,1,0,0';
+    google.charts.load("current", {
+        callback: function () {
+            var options = {
+                title: "Temperature",
+                curveType: "function",
+                legend: { position: "bottom" }
+            };
 
-    var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+            $.get("../logs.csv", function (csvString) {
+                var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
 
-    var data = new google.visualization.arrayToDataTable(arrayData);
-    
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-    chart.draw(data);
-  },
-  packages: ['corechart']
-});
+                var data = new google.visualization.arrayToDataTable(arrayData);
+
+                var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
+                chart.draw(data);
+            });
+        },
+        packages: ["corechart"]
+    });
 </script>
 Hello World!<br/>
 <?php
