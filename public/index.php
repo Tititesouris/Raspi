@@ -18,7 +18,7 @@
                 legend: { position: "bottom" }
             };
 
-            $.get("../logs.csv", function (csvString) {
+            $.get("logs.csv", function (csvString) {
                 var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
 
                 var data = new google.visualization.arrayToDataTable(arrayData);
@@ -32,7 +32,7 @@
 </script>
 Hello World!<br/>
 <?php
-$file = fopen("../logs.csv", "r");
+$file = fopen("logs.csv", "r");
 print_r(fgetcsv($file));
 fclose($file);
 ?>
