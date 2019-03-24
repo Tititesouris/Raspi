@@ -35,8 +35,7 @@
             title: title,
             legend: "top",
             height: 400,
-            colors: [color],
-            pointSize: 2
+            colors: [color]
         };
         var dataTable = new google.visualization.DataTable();
         dataTable.addColumn("datetime", "Date");
