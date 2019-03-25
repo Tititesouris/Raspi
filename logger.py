@@ -10,10 +10,10 @@ while True:
     file = open("public/logs.csv", "w")
     try:
         for line in tail("-n 100", "sensordata.csv", _iter=True):
-            timestamp, temperature, humidity = line.split(";")
+            timestamp, temperature, humidity = line.rstrip().split(";")
             label, description = ["", ""]
             if timestamp in labels.keys():
-                timestamp, label, description = labels[timestamp].split(";")
+                timestamp, label, description = labels[timestamp].rstrip().split(";")
             file.write(timestamp + ";" + temperature + ";" + humidity + ";" + label + ";" + description + "\n")
     finally:
         file.close()
