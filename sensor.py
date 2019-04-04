@@ -79,6 +79,7 @@ class AM2320:
         temp /= 10.0
 
         humi = self._combine_bytes(data[2], data[3]) / 10.0
+        posix.close(fd)
 
         return (temp, humi)
 
@@ -88,9 +89,6 @@ am2320 = AM2320(1)
 start_time = time.time()
 while True:
     (t, h) = am2320.readSensor()
-    file = open("sensordata.csv", "a")
-    try:
+    with open("sensordata.csv", "a") as file:
         file.write(str(time.time()) + ";" + str(t) + ";" + str(h) + "\n")
-    finally:
-        file.close()
     time.sleep(60.0 - ((time.time() - start_time) % 60.0))
