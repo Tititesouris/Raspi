@@ -1,7 +1,7 @@
 <?php
-if (isset($_GET["timestamp"]) && isset($_GET["label"]) && isset($_GET["description"])) {
+if (isset($_GET["timestamp"]) && isset($_GET["label"])) {
     $file = __DIR__ . "/../labeldata.csv";
-    $line = $_GET["timestamp"] . ";" . $_GET["label"] . ";" . $_GET["description"] . "\n";
+    $line = $_GET["timestamp"] . ";" . $_GET["label"] . "\n";
     $fh = fopen($file, "a") or die("Can't open file");
     fwrite($fh, $line);
     fclose($fh);

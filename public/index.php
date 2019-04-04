@@ -9,16 +9,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 <select id="marker">
-    <option value="Laundry">Put laundry to dry</option>
-    <option value="Window Open">Opened the window</option>
-    <option value="Window Closed">Closed the window</option>
+    <option value="LD">Laundry Dry</option>
+    <option value="OW">Open Window</option>
+    <option value="CW">Close Window</option>
 </select>
 <button id="addmarker">Add marker</button>
 <div id="temperature_chart"></div>
 <div id="humidity_chart"></div>
 <script>
-    var addMarker = function (timestamp, label, description) {
-        $.get("api.php", {timestamp: timestamp, label: label, description: description}, function (response) {
+    var addMarker = function (timestamp, label) {
+        $.get("api.php", {timestamp: timestamp, label: label}, function (response) {
             console.log(response);
         });
     };
@@ -66,7 +66,7 @@
         $("#addmarker").click(function () {
             var selection = chart.getSelection()[0];
             if (selection) {
-                addMarker(data[selection.row][0].getTime() / 1000, $("#marker").val(), $("#marker option:selected").text());
+                addMarker(data[selection.row][0].getTime() / 1000, $("#marker").val());
             }
         });
 
