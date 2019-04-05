@@ -1,5 +1,4 @@
 import time
-
 from sh import tail
 
 descriptions = {
@@ -21,4 +20,4 @@ while True:
                 timestamp, label = labels[timestamp].rstrip().split(";")
                 description = descriptions.get(label)
             file.write(timestamp + ";" + temperature + ";" + humidity + ";" + label + ";" + description + "\n")
-    time.sleep(60.0)
+    time.sleep(300)

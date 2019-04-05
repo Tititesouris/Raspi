@@ -42,7 +42,6 @@
     };
 
     var drawTimelineChart = function (data, title, valueName, chartElement, color) {
-        console.log(data);
         var options = {
             title: title,
             legend: "top",
@@ -59,7 +58,6 @@
         dataTable.addColumn({type: "string", role: "annotationText"});
 
         dataTable.addRows(data);
-        console.log(dataTable);
 
         var chart = new google.visualization.LineChart(chartElement);
 

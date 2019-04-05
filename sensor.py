@@ -86,9 +86,11 @@ class AM2320:
 
 am2320 = AM2320(1)
 
+while int(time.time() * 100 % (5 * 6000)) != 0:
+    pass
 start_time = time.time()
 while True:
     (t, h) = am2320.readSensor()
     with open("sensordata.csv", "a") as file:
         file.write(str(time.time()) + ";" + str(t) + ";" + str(h) + "\n")
-    time.sleep(60.0 - ((time.time() - start_time) % 60.0))
+    time.sleep(300.0 - ((time.time() - start_time) % 300.0))
