@@ -17,11 +17,23 @@
 <div id="temperature_chart"></div>
 <div id="humidity_chart"></div>
 <script>
+    CHART = null;
     var addMarker = function (timestamp, label) {
         $.get("api.php", {timestamp: timestamp, label: label}, function (response) {
             console.log(response);
         });
     };
+
+    $("#addmarker").click(function () {
+        if (CHART != null) {
+            var selection = CHART.getSelection()[0];
+            if (selection) {
+                addMarker(data[selection.row][0].getTime() / 1000, $("#marker").val());
+            } else {
+                addMarker(null, $("#marker").val());
+            }
+        }
+    });
 
     var parseData = function (value, state) {
         if (state.colNum === 1)
@@ -61,19 +73,13 @@
 
         var chart = new google.visualization.LineChart(chartElement);
 
-        $("#addmarker").click(function () {
-            var selection = chart.getSelection()[0];
-            if (selection) {
-                addMarker(data[selection.row][0].getTime() / 1000, $("#marker").val());
-            }
-        });
-
         function selectHandler() {
 
         }
 
         google.visualization.events.addListener(chart, "select", selectHandler);
         chart.draw(dataTable, options);
+        return chart;
     };
 
     google.charts.load("current", {
@@ -83,7 +89,7 @@
                     separator: ";",
                     onParseValue: parseTemperature
                 });
-                drawTimelineChart(
+                CHART = drawTimelineChart(
                     temperatureData,
                     "Temperature over time",
                     "Temperature °C",
